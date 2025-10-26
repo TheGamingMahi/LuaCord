@@ -1,6 +1,6 @@
 # LuaCord - Notices and Attributions
 
-LuaCord is based on Lukkit, originally created by James Upjohn (jammehcow), jupjohn, AL_1, mathhulk, and ArtexDevelopment.
+LuaCord is based on Lukkit, originally created by James Upjohn (jammehcow), AL_1, mathhulk, and ArtexDevelopment.
 
 Original Lukkit repository: https://github.com/jammehcow/Lukkit
 
