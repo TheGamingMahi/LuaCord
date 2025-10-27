@@ -6,7 +6,6 @@ import io.thegamingmahi.luacord.environment.plugin.LukkitPlugin
 import io.thegamingmahi.luacord.environment.plugin.LukkitPluginException
 import org.bukkit.inventory.ItemStack
 import org.bukkit.scheduler.BukkitRunnable
-import org.luaj.vm2.LuaFunction
 import org.luaj.vm2.LuaTable
 import org.luaj.vm2.LuaValue
 import org.luaj.vm2.lib.OneArgFunction
@@ -28,7 +27,7 @@ class UtilitiesWrapper(private val plugin: LukkitPlugin) : LuaTable() {
         set("getTableFromList", object : OneArgFunction() {
             override fun call(arg: LuaValue): LuaValue {
                 val list: Array<Any> = when (val userData = arg.checkuserdata()) {
-                    is Collection<*> -> userData.toTypedArray()
+                    is Collection<*> -> userData.filterNotNull().toTypedArray()
                     is Stream<*> -> userData.toArray()
                     else -> throw LukkitPluginException("util.tableFromList(obj) was passed something other than an instance of Collection or Stream.")
                 }
@@ -96,7 +95,7 @@ class UtilitiesWrapper(private val plugin: LukkitPlugin) : LuaTable() {
 
         set("runDelayed", object : TwoArgFunction() {
             override fun call(function: LuaValue, time: LuaValue): LuaValue {
-                val future: ScheduledFuture<LuaValue> = runDelayedThreadPool.schedule(
+                val future: ScheduledFuture<*> = runDelayedThreadPool.schedule(
                     { function.call() },
                     time.checklong(),
                     TimeUnit.MILLISECONDS
