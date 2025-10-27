@@ -7,7 +7,6 @@ import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import io.thegamingmahi.luacord.Utilities;
 import io.thegamingmahi.luacord.environment.exception.StorageObjectException;
-import io.thegamingmahi.luacord.environment.plugin.LukkitPlugin;
 import org.luaj.vm2.LuaBoolean;
 import org.luaj.vm2.LuaString;
 import org.luaj.vm2.LuaValue;

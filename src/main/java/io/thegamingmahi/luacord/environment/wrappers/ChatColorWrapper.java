@@ -1,7 +1,6 @@
 package io.thegamingmahi.luacord.environment.wrappers;
 
 import io.thegamingmahi.luacord.environment.LuaEnvironment.ObjectType;
-import io.thegamingmahi.luacord.environment.plugin.LukkitPlugin;
 import org.bukkit.ChatColor;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;

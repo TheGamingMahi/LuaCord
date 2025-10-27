@@ -2,7 +2,6 @@ package io.thegamingmahi.luacord.environment.wrappers.storage;
 
 import io.thegamingmahi.luacord.environment.LuaEnvironment.ObjectType;
 import io.thegamingmahi.luacord.environment.exception.StorageObjectException;
-import io.thegamingmahi.luacord.environment.plugin.LukkitPlugin;
 import org.luaj.vm2.LuaBoolean;
 import org.luaj.vm2.LuaString;
 import org.luaj.vm2.LuaTable;

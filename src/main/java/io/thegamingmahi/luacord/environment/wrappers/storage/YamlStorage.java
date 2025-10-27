@@ -2,7 +2,6 @@ package io.thegamingmahi.luacord.environment.wrappers.storage;
 
 import io.thegamingmahi.luacord.Utilities;
 import io.thegamingmahi.luacord.environment.exception.StorageObjectException;
-import io.thegamingmahi.luacord.environment.plugin.LukkitPlugin;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.luaj.vm2.LuaBoolean;

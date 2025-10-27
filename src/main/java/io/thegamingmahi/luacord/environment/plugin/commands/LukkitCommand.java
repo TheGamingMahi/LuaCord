@@ -2,7 +2,6 @@ package io.thegamingmahi.luacord.environment.plugin.commands;
 
 import io.thegamingmahi.luacord.Utilities;
 import io.thegamingmahi.luacord.environment.LuaEnvironment;
-import io.thegamingmahi.luacord.environment.plugin.LukkitPlugin;
 import io.thegamingmahi.luacord.environment.plugin.LukkitPluginException;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

@@ -1,6 +1,5 @@
 package io.thegamingmahi.luacord.environment;
 
-import io.thegamingmahi.luacord.environment.plugin.LukkitPlugin;
 import io.thegamingmahi.luacord.environment.plugin.LukkitPluginException;
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaTable;
