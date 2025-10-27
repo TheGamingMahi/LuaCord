@@ -31,9 +31,9 @@ class LukkitCommand(
 ) : Command(name.lowercase(), description, usage, aliases.toList()) {
 
     companion object {
-        private const val ERROR_MISSING_ARGS = "${ChatColor.DARK_RED}${ChatColor.BOLD}ERROR!${ChatColor.RED} Missing args."
-        private const val ERROR_TOO_MANY_ARGS = "${ChatColor.DARK_RED}${ChatColor.BOLD}ERROR!${ChatColor.RED} Too many args."
-        private const val ERROR_NO_PERMISSION = "${ChatColor.DARK_RED}${ChatColor.BOLD}ERROR!${ChatColor.RED} No permission."
+        private val ERROR_MISSING_ARGS = "${ChatColor.DARK_RED}${ChatColor.BOLD}ERROR!${ChatColor.RED} Missing args."
+        private val ERROR_TOO_MANY_ARGS = "${ChatColor.DARK_RED}${ChatColor.BOLD}ERROR!${ChatColor.RED} Too many args."
+        private val ERROR_NO_PERMISSION = "${ChatColor.DARK_RED}${ChatColor.BOLD}ERROR!${ChatColor.RED} No permission."
 
         private fun getPrivateField(obj: Any, field: String): Any? {
             val clazz = obj.javaClass

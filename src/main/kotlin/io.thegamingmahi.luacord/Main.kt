@@ -340,7 +340,7 @@ class Main : JavaPlugin() {
 
                 if (errors.isPresent) {
                     if (subArgs.isEmpty()) {
-                        errors.get().forEach { exception ->
+                        errors.get().forEach { exception: Exception ->
                             sender.sendMessage(exception.message ?: "Unknown error")
                             exception.printStackTrace()
                         }
