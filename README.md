@@ -207,17 +207,13 @@ When using `bypass-plugin-registration: true` (Paper mode):
 - [ ] `.jar` plugin wrapper support alongside `.lkt` files
 - [ ] JAR generator web tool for easy packaging
 - [ ] Official website and documentation
-- [ ] CurseForge release
-
 ### Future / Up to 1.0.0
 - [ ] Complete Kotlin migration (100%)
 - [ ] Extended Paper API implementations
-- [ ] Comprehensive test suite
 - [ ] VSCode extension
 - [ ] Plugin marketplace/repository
 - [ ] More example plugins
 - [ ] Video tutorials
-- [ ] Production-ready stability
 
 ---
 
