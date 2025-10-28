@@ -1,144 +1,277 @@
-# Lukkit 2.2.0 - The Paper Fix Update
+# LuaCord
 
-**Release Date:** October 2025  
-**Maintainer:** TheGamingMahi
+**Write real Minecraft plugins in Lua.**
 
-After almost 6 years since the last update, Lukkit is back with full Paper compatibility!
+LuaCord is a modern fork of [Lukkit](https://github.com/jammehcow/Lukkit), rewritten in Kotlin (87%) with full Paper compatibility and extended API support. Create powerful Minecraft plugins using Lua scripting with access to the complete Spigot/Paper API.
 
-## 📋 TL;DR
-
-Lukkit now works on modern Paper servers! Fixed plugin loading issues caused by Paper's remapping system and added a bypass mode for Paper's plugin restrictions. Just set `bypass-plugin-registration: true` in config and your `.lkt` plugins work perfectly.
-
----
-
-## 🎉 What's New
-
-### Paper Server Compatibility
-- **Fixed plugin loading on modern Paper servers** - Lukkit now correctly locates `.lkt` files even when Paper remaps plugins
-- **Bypass mode for Paper's plugin restrictions** - New loading system that works around Paper's security changes
-- **Configurable loading modes** - Switch between normal and bypass mode depending on your server software
-
-### New Configuration Options
-- **`debug-mode`** - Enable verbose logging for troubleshooting (default: false)
-- **`bypass-plugin-registration`** - Enable Paper compatibility mode (default: true)
-- Config version bumped from 3 to 4
-
-### Improvements
-- Better debug logging system
-- Automatic config migration when updating
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Spigot](https://img.shields.io/badge/Spigot-Compatible-orange.svg)](https://www.spigotmc.org/)
+[![Paper](https://img.shields.io/badge/Paper-Compatible-blue.svg)](https://papermc.io/)
 
 ---
 
-## 🔧 Configuration
+## 🎯 Features
+
+- **Real Minecraft Plugins** - Not just scripts, full plugin functionality with commands, events, and permissions
+- **Full Spigot API Access** - Use the entire Bukkit/Spigot API from Lua
+- **Paper Compatible** - Works flawlessly on modern Paper servers
+- **100% Backwards Compatible** - All existing Lukkit `.lkt` plugins work without modification
+- **Clean Console Output** - No more ugly class path spam in logs (`[Example Plugin]` instead of `[nz.co.jammehcow.lukkit...]`)
+- **Hot Reload** - Reload dev plugins without restarting the server
+- **Modern Codebase** - 87% Kotlin for better maintainability and null safety
+
+---
+
+## 📦 Installation
+
+1. Download `LuaCord-0.1.0-BETA.jar` from [CurseForge](https://www.curseforge.com/minecraft/bukkit-plugins/luacord)
+2. Place it in your server's `/plugins/` folder
+3. Place your `.lkt` plugin files in the same `/plugins/` folder
+4. Start/restart your server
+
+**Requirements:**
+- Spigot or Paper (any version)
+- Java 8 or higher
+
+---
+
+## 🚀 Quick Start
+
+### Plugin Structure
+
+A LuaCord plugin can be either:
+
+**Option 1: `.lkt` file** (ZIP archive containing):
+```
+MyPlugin.lkt/
+├── main.lua          # Your plugin code
+├── plugin.yml        # Plugin metadata
+└── config.yml        # Optional default config
+```
+
+**Option 2: Folder** (for development):
+```
+/plugins/MyPlugin/
+├── main.lua
+├── plugin.yml
+└── config.yml
+```
+
+### Creating Your First Plugin
+
+Create `main.lua`:
+
+```lua
+plugin:onEnable(function()
+    logger:info("My plugin is enabled!")
+end)
+
+plugin:addCommand({
+    name = "hello",
+    description = "Say hello!",
+    usage = "/hello"
+}, function(event)
+    local sender = event:getSender()
+    sender:sendMessage("Hello from Lua!")
+end)
+
+plugin:registerEvent("PlayerJoinEvent", function(event)
+    local player = event:getPlayer()
+    player:sendMessage("Welcome to the server!")
+end)
+```
+
+Create `plugin.yml`:
+```yaml
+name: MyPlugin
+version: 1.0
+main: main.lua
+author: YourName
+description: My first LuaCord plugin
+```
+
+**For .lkt:** ZIP these files and rename to `MyPlugin.lkt`  
+**For folder:** Just place the folder in `/plugins/`
+
+That's it! Restart your server and your plugin is live.
+
+---
+
+## ⚙️ Configuration
+
+`config.yml` options:
 
 ```yaml
 # Enable debug mode for verbose logging
 debug-mode: false
 
 # Paper compatibility mode (recommended for Paper servers)
-# Set to 'true' for Paper, 'false' for Spigot
 bypass-plugin-registration: true
+
+# Enable Lua debug globals
+lua-debug: false
+
+# Check for updates on startup
+update-checker: false
+
+# Allow /lukkit run command
+can-run-code: true
 ```
 
----
-
-## 📦 Installation
-
-1. Download `Lukkit-2.2.0.jar`
-2. Place in your server's `/plugins` folder
-3. Place your `.lkt` plugins in the same `/plugins` folder
-4. Start/restart your server
+**For Paper servers:** Keep `bypass-plugin-registration: true`  
+**For Spigot servers:** You can set it to `false`
 
 ---
 
-## 🐛 Bug Fixes
+## 📚 Documentation
 
-- Fixed: Lukkit unable to find `.lkt` files on Paper servers due to plugin remapping
-- Fixed: Plugin loading failures on modern Paper versions
+### Commands
+
+- `/lukkit` - Show help message
+- `/lukkit plugins` - List all loaded LuaCord plugins
+- `/lukkit dev` - Show developer commands
+- `/lukkit dev reload <plugin>` - Hot reload a dev plugin (folder-based plugins only)
+- `/lukkit dev errors` - View error stack for debugging
+- `/lukkit dev pack <plugin>` - Package a dev plugin folder into `.lkt`
+- `/lukkit dev unpack <plugin>` - Unpack a `.lkt` into a folder for development
+
+### Plugin API
+
+```lua
+-- Lifecycle hooks
+plugin:onLoad(function() end)
+plugin:onEnable(function() end)
+plugin:onDisable(function() end)
+
+-- Commands
+plugin:addCommand({ name = "cmd", ... }, function(event) end)
+
+-- Events
+plugin:registerEvent("EventName", function(event) end)
+
+-- Server access
+local server = plugin:getServer()
+
+-- Config
+config:getValue("path")
+config:set("path", value)
+config:save()
+
+-- Logging
+logger:info("message")
+logger:warn("message")
+logger:severe("message")
+```
+
+For full API documentation, see the [Lukkit Wiki](https://github.com/jammehcow/Lukkit/wiki) (LuaCord is backwards compatible).
 
 ---
 
-## ⚙️ Technical Details
+## 🐛 Known Issues
 
-### Paper Remapping Fix
-Paper remaps plugin JARs to a `.paper-remapped` folder. The original code used `getFile().getParentFile()` which pointed to the remapped location, not the actual `/plugins` folder where `.lkt` files are located.
+When using `bypass-plugin-registration: true` (Paper mode):
 
-**Solution:** Changed to `getDataFolder().getParentFile()` which correctly points to `/plugins/`
+- LuaCord plugins don't appear in `/plugins` (use `/lukkit plugins` instead)
+- Other plugins can't detect LuaCord plugins via PluginManager
+- Plugin dependencies aren't automatically handled
 
-### Bypass Mode
-Paper's modern security restricts dynamic plugin loading through custom PluginLoaders. Bypass mode loads plugins manually without registering them with Paper's PluginManager, avoiding these restrictions while maintaining full functionality.
-
----
-
-## 🔄 Migration Guide
-
-### From Lukkit 2.1.2
-
-1. Replace your old `Lukkit.jar` with `Lukkit-2.2.0.jar`
-2. Your config will automatically update (old config backed up to `config.old.yml`)
-3. All existing `.lkt` plugins work without changes
-4. Recommended: Set `bypass-plugin-registration: true` for Paper servers
-
-### Compatibility
-
-- ✅ Paper 
-- ✅ Spigot 
-- ✅ All existing Lukkit plugins (no changes needed)
+**These limitations don't affect plugin functionality!** Your plugins will work perfectly.
 
 ---
 
-## 🎯 Known Limitations (Bypass Mode)
+## 📝 Changelog
 
-When using `bypass-plugin-registration: true`:
+### 0.1.0-BETA *(Current)*
 
-- Lukkit plugins don't appear in `/plugins` command (use `/lukkit plugins` instead)
-- Other plugins can't detect Lukkit plugins via PluginManager
-- Plugin dependencies (`depend:` in plugin.yml) aren't automatically handled
-- Use `/lukkit dev reload <plugin>` instead of `/reload` for Lukkit plugins
+**Initial LuaCord release - forked from Lukkit 2.2.0**
 
-**For most users, these limitations don't matter!** Your plugins will work perfectly.
+- ✨ Rewritten in Kotlin (87% conversion)
+- ✨ Clean console logging (no more `[nz.co.jammehcow.lukkit...]` spam)
+- ✨ Full Paper compatibility maintained
+- ✨ Package renamed to `io.thegamingmahi.luacord`
+- ✨ 100% backwards compatible with Lukkit plugins
+- ✨ Improved error handling with stack management
+- ✨ Better documentation and modern codebase
+
+**Inherited from Lukkit 2.2.0 (by TheGamingMahi):**
+- ✅ Paper server compatibility fix
+- ✅ Bypass mode for Paper's plugin restrictions
+- ✅ Configurable loading modes
+- ✅ Debug mode for troubleshooting
+
+---
+
+## 🎯 Roadmap
+
+### 0.2.0 - JAR Support
+- [ ] `.jar` plugin wrapper support alongside `.lkt` files
+- [ ] JAR generator web tool for easy packaging
+- [ ] Official website and documentation
+- [ ] CurseForge release
+
+### Future / Up to 1.0.0
+- [ ] Complete Kotlin migration (100%)
+- [ ] Extended Paper API implementations
+- [ ] Comprehensive test suite
+- [ ] VSCode extension
+- [ ] Plugin marketplace/repository
+- [ ] More example plugins
+- [ ] Video tutorials
+- [ ] Production-ready stability
+
+---
+
+## 📜 License
+
+**LuaCord Core:** GPL v3 - This ensures the framework remains open source.
+
+**Plugin Wrapper Template (Coming Soon):** MIT - Maximum freedom for plugin developers.
+
+See [LICENSE](LICENSE) for details.
 
 ---
 
 ## 🙏 Credits
 
-- **Original Authors:** jammehcow, AL_1, mathhulk, ArtexDevelopment
-- **Paper Fix:** TheGamingMahi
-- **Special Thanks:** The Lukkit community for keeping it alive!
+### LuaCord
+- **TheGamingMahi** - Creator, Kotlin rewrite, Paper fix (Lukkit 2.2.0), maintenance
+
+### Original Lukkit Team
+- jammehcow
+- AL_1
+- mathhulk
+- ArtexDevelopment
+
+**Special thanks to the Lukkit community for keeping the project alive!**
+
+Original Lukkit repository: https://github.com/jammehcow/Lukkit (archived)
 
 ---
 
-## 📝 Notes
+## 🔗 Links
 
-The original Lukkit repository is archived and no longer accepting contributions. This is an unofficial fork/continuation focused on Paper compatibility. 
-
-If you encounter issues, please report them with:
-- Your server version (e.g., Paper 1.20.4)
-- Config settings (`debug-mode` and `bypass-plugin-registration` values)
-- Console logs when loading fails
+- **GitHub:** https://github.com/TheGamingMahi/LuaCord
+- **Issues:** https://github.com/TheGamingMahi/LuaCord/issues
+- **Website:** *(Coming Soon)*
+- **CurseForge:** *(Coming Soon)*
 
 ---
 
-## 🚀 Future Plans
+## 💬 Support
 
-**Luacord** - A modern fork is planned with:
-- Kotlin rewrite for cleaner, more maintainable code
-- .jar support alongside .lkt files
-- Extended Spigot/Paper API coverage
-- Paper-specific API implementations
-- 100% backwards compatible with existing Lukkit plugins
-- Improved developer tooling and documentation
+**Found a bug?** Open an issue on [GitHub Issues](https://github.com/TheGamingMahi/LuaCord/issues)
 
-Development will be gradual. Lukkit 2.2.0 remains stable in the meantime.
+**Need help?** Check the [Lukkit Wiki](https://github.com/jammehcow/Lukkit/wiki) (LuaCord is backwards compatible)
 
 ---
 
-## 📄 License
+## ⚠️ Important Notes
 
-Lukkit is open source. Original license terms apply.
+- LuaCord is in **BETA** - expect bugs and potential breaking changes
+- This is a fork/continuation of the archived Lukkit project
+- Not affiliated with the original Lukkit developers
+- The original Lukkit repository is no longer maintained
 
 ---
 
-**Download:** [Lukkit-2.2.0.jar](https://github.com/TheGamingMahi/Lukkit-PaperFix/releases/tag/Lukkit)  
-**Support:** Use `/lukkit dev errors` for debugging  
-**Version:** 2.2.0 
+**Write plugins. Ship faster. LuaCord makes it easy.** 🚀
