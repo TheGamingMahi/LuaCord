@@ -51,7 +51,7 @@ MyPlugin.lkt/
 
 **Option 2: Folder** (for development):
 ```
-/plugins/MyPlugin/
+/plugins/MyPlugin.lkt/ # Folder name ending with .lkt
 ├── main.lua
 ├── plugin.yml
 └── config.yml
