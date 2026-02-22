@@ -160,6 +160,13 @@ class Main : JavaPlugin() {
         // Register our custom plugin loader on the plugin manager
         pluginManager.registerInterface(LukkitPluginLoader::class.java)
 
+        // CREATE PLUGIN LOADER FOR BYPASS MODE
+        // This ensures pluginLoader is available for JAR-wrapped plugins
+        if (bypassPluginRegistration) {
+            pluginLoader = LukkitPluginLoader(server)
+            debug("Created LukkitPluginLoader for bypass mode")
+        }
+
         logger?.info("Loading LuaCord plugins...")
 
         // PAPER FIX: Use getDataFolder() to get correct plugins folder
@@ -189,11 +196,7 @@ class Main : JavaPlugin() {
 
                             val pluginFile = LukkitPluginFile(file)
 
-                            if (pluginLoader == null) {
-                                pluginLoader = LukkitPluginLoader(server)
-                                debug("Created new LukkitPluginLoader")
-                            }
-
+                            // pluginLoader already created above
                             val plugin = LukkitPlugin(pluginLoader!!, pluginFile)
                             debug("Created LukkitPlugin: ${plugin.name}")
 
