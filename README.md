@@ -27,7 +27,7 @@ LuaCord is a modern fork of [Lukkit](https://github.com/jammehcow/Lukkit), rewri
 
 ### For Server Owners
 
-1. Download `LuaCord-0.2.0-BETA.jar` from [Releases](https://github.com/TheGamingMahi/LuaCord/releases)
+1. Download `LuaCord-0.2.0-BETA.jar`
 2. Place it in your server's `/plugins/` folder
 3. Place your `.lkt` or `.jar` plugin files in the same `/plugins/` folder
 4. Start/restart your server
