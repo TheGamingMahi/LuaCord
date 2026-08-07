@@ -137,6 +137,7 @@ can-run-code: true
 ---
 
 ## 📚 Commands
+
 - `/luacord` - Show help message
 - `/luacord plugins` - List all loaded LuaCord plugins
 - `/luacord dev` - Show developer commands
@@ -258,7 +259,7 @@ When using `bypass-plugin-registration: true` (Paper mode):
 
 ### 0.1.0-BETA
 
-**JAR Support Release - The Distribution Update**
+**Initial LuaCord release - forked from Lukkit 2.2.0**
 
 **Inherited from Lukkit 2.2.0 (by TheGamingMahi):**
 - ✅ Paper server compatibility fix
