@@ -7,8 +7,6 @@ import io.thegamingmahi.luacord.environment.plugin.LukkitPluginLoader
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
-import org.bukkit.plugin.InvalidDescriptionException
-import org.bukkit.plugin.InvalidPluginException
 import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.PluginManager
 import org.bukkit.plugin.java.JavaPlugin
@@ -98,7 +96,7 @@ class Main : JavaPlugin() {
         }
 
         // Set up the tab completer for the /luacord command
-        getCommand("lukkit")?.setTabCompleter(TabCompleter())
+        getCommand("luacord")?.setTabCompleter(TabCompleter())
 
         // Subtract one to count for LuaCord being loaded
         val totalPlugins = pluginLoader?.loadedPlugins?.size ?: 0
@@ -211,14 +209,14 @@ class Main : JavaPlugin() {
                             pluginManager.loadPlugin(file)
                         }
                     } catch (e: Exception) {
-                        when (e) {
-                            is InvalidPluginException, is InvalidDescriptionException, is LuaError -> {
-                                debug("ERROR loading plugin: ${e.message}")
-                                LuaEnvironment.addError(e)
-                                e.printStackTrace()
-                            }
-                            else -> throw e
-                        }
+                        // IMPORTANT: never rethrow here. This is inside a loop that loads
+                        // every .lkt plugin in the folder - rethrowing kills the loop (and
+                        // therefore Main's onLoad()) on the first bad plugin, silently
+                        // preventing every plugin listed after it from ever being loaded.
+                        // One broken plugin must not be able to take the others down with it.
+                        logger?.severe("Failed to load LuaCord plugin from \"${file.name}\": ${e.message}")
+                        LuaEnvironment.addError(e)
+                        e.printStackTrace()
                     }
                 }
             }
@@ -242,7 +240,7 @@ class Main : JavaPlugin() {
     }
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
-        if (!command.name.startsWith("lukkit")) return false
+        if (!command.name.startsWith("luacord")) return false
 
         if (args.isEmpty()) {
             sender.sendMessage(getHelpMessage())

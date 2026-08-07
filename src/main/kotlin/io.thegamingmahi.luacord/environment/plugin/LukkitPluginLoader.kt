@@ -82,6 +82,11 @@ class LukkitPluginLoader(private val server: Server) : PluginLoader {
     }
 
     override fun enablePlugin(plugin: Plugin) {
+        // Guard against double-enabling: a JAR wrapper (via LuaCordAPI.loadLuaPlugin)
+        // may already have enabled this plugin before Main's own enable sweep reaches it.
+        // Without this check, event listeners get registered twice and onEnable fires twice.
+        if (plugin.isEnabled) return
+
         plugin.logger.info("Enabling ${plugin.description.fullName}")
         val event = LukkitPluginEnableEvent(plugin as LukkitPlugin)
         Bukkit.getServer().pluginManager.callEvent(event)
@@ -96,6 +101,10 @@ class LukkitPluginLoader(private val server: Server) : PluginLoader {
     }
 
     override fun disablePlugin(plugin: Plugin) {
+        // Same reasoning as enablePlugin(): avoid firing the disable callback twice
+        // if something disables a plugin that's already disabled.
+        if (!plugin.isEnabled) return
+
         plugin.logger.info("Disabling ${plugin.description.fullName}")
         val event = LukkitPluginDisableEvent(plugin as LukkitPlugin)
         Bukkit.getServer().pluginManager.callEvent(event)

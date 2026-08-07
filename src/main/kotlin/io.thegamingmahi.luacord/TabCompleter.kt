@@ -25,7 +25,7 @@ class TabCompleter : org.bukkit.command.TabCompleter {
     ): List<String> {
         val tabComplete = mutableListOf<String>()
 
-        if (command.name.startsWith("lukkit")) {
+        if (command.name.startsWith("luacord")) {
             when (args.size) {
                 1 -> return getFilteredCompletions(args[0], subCommands)
 
