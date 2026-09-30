@@ -27,7 +27,7 @@ LuaCord is a modern fork of [Lukkit](https://github.com/jammehcow/Lukkit), rewri
 
 ### For Server Owners
 
-1. Download `LuaCord-0.2.5-BETA.jar`
+1. Download `LuaCord-0.2.6-BETA.jar`
 2. Place it in your server's `/plugins/` folder
 3. Place your `.lkt` or `.jar` plugin files in the same `/plugins/` folder
 4. Start/restart your server
@@ -219,7 +219,19 @@ When using `bypass-plugin-registration: true` (Paper mode):
 
 ## 📝 Changelog
 
-### 0.2.5-BETA *(Current)*
+### 0.2.6-BETA *(Current)*
+
+**Packaging Fix**
+
+**Bug Fixes:**
+- 🐛 Fixed the jar bundling unrelated Maven build libraries (Plexus Utils and the Maven compiler plugin's dependencies), which caused 0.2.5 to be rejected by CurseForge moderation
+
+**Changes:**
+- 🔄 Removed unused dependencies (`reflections`, `ebean`)
+- 🔄 Jar size reduced from about 12 MB to about 4 MB
+- 🔄 No changes to the Lua API or plugin behavior - existing `.lkt` and `.jar` plugins work as before
+
+### 0.2.5-BETA
 
 **Stability & Rebrand Update**
 
