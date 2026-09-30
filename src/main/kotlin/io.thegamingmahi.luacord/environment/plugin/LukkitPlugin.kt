@@ -1,6 +1,5 @@
 package io.thegamingmahi.luacord.environment.plugin
 
-import com.avaje.ebean.EbeanServer
 import io.thegamingmahi.luacord.Main
 import io.thegamingmahi.luacord.Utilities
 import io.thegamingmahi.luacord.environment.LuaEnvironment
