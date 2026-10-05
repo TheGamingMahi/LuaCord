@@ -178,7 +178,7 @@ logger.severe("message")
 logger.debug("message")
 ```
 
-For full API documentation, see the [Lukkit Docs](https://docs.lukkit.net) (LuaCord is backwards compatible).
+For guides and examples, see the [LuaCord Wiki](https://luacordmc.github.io/wiki/). For the full API reference, the [Lukkit Docs](https://docs.lukkit.net) still apply (LuaCord is backwards compatible).
 
 ---
 
@@ -294,7 +294,7 @@ When using `bypass-plugin-registration: true` (Paper mode):
 ### 0.3.0 - Quality of Life Update
 - [ ] **Command fixes** - Fix and improve `/luacord` commands (for the LuaCord core plugin itself)
 - [ ] **bStats integration** - Built-in support for plugin developers to easily add bStats to their Lua plugins
-- [ ] **Basic LuaCord Wiki** - Simple documentation with essential guides for plugin development
+- [x] **[Basic LuaCord Wiki](https://luacordmc.github.io/wiki/)** - Simple documentation with essential guides for plugin development
 - [ ] More example plugins
 
 ### Future / Up to 1.0.0 - Stable Release
@@ -337,7 +337,8 @@ Original Lukkit repository: https://github.com/jammehcow/Lukkit (archived)
 
 - **Website:** https://luacordmc.github.io
 - **JAR Generator:** https://luacordmc.github.io/generator.html
-- **Documentation:** https://docs.lukkit.net (Lukkit docs - LuaCord compatible)
+- **Wiki:** https://luacordmc.github.io/wiki/
+- **Lukkit Docs:** https://docs.lukkit.net (older docs - LuaCord compatible)
 - **Issues:** https://github.com/TheGamingMahi/LuaCord/issues
 - **CurseForge:** https://www.curseforge.com/minecraft/bukkit-plugins/luacord
 - **Modrinth:** https://modrinth.com/plugin/luacord
@@ -348,7 +349,7 @@ Original Lukkit repository: https://github.com/jammehcow/Lukkit (archived)
 
 **Found a bug?** Open an issue on [GitHub Issues](https://github.com/TheGamingMahi/LuaCord/issues)
 
-**Need help?** Check the [Lukkit Docs](https://docs.lukkit.net) (LuaCord is backwards compatible)
+**Need help?** Check the [LuaCord Wiki](https://luacordmc.github.io/wiki/) (the [Lukkit Docs](https://docs.lukkit.net) also apply, since LuaCord is backwards compatible)
 
 ---
 
